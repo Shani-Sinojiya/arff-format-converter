@@ -1,0 +1,23 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools", "wheel"]
+
+[tool.poetry]
+authors = ["Shani Sinojiya <shanisinojiya@gmail.com>"]
+description = "A tool to convert ARFF files to different formats."
+license = "MIT"
+name = "arff-format-converter"
+readme = "README.md"
+requires-python = ">=3.6"
+version = "1.0.3-beta-4"
+
+[tool.poetry.dependencies]
+argparse = "^1.4.0"
+fastavro = "^1.9.3"
+openpyxl = "^3.1.2"
+pandas = "^2.2.0"
+tqdm = "^4.66.1"
+ujson = "^5.9.0"
+
+[tool.poetry.scripts]
+arff-format-converter = "arff_format_converter.arff_converter:main"

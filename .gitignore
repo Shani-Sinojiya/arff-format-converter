@@ -1,0 +1,7 @@
+/__init__.cpython-37.pyc
+__pycache__
+
+
+dist
+build
+arff_format_converter.egg-info
