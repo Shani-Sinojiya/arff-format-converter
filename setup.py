@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0.3-beta-4'
+version = '1.0.3'
 name = 'arff-format-converter'
 description = 'Converts ARFF files to CSV, JSON, XML, XLSX, and ORC'
 author = 'Shani Sinojiya'
@@ -29,8 +29,6 @@ keywords = [
     "data-import",
 ]
 
-license = open('LICENSE', encoding="utf-8").read()
-
 setup(
     name=name,
     version=version,
@@ -40,7 +38,7 @@ setup(
     author_email=author_email,
     maintainer=author,
     maintainer_email=author_email,
-    license=license,
+    license="MIT",
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
     install_requires=[
