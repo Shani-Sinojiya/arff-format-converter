@@ -9,7 +9,6 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Shani-Sinojiya/arff-format-converter/CI?style=flat-square)
-![GitHub](https://img.shields.io/github/license/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub followers](https://img.shields.io/github/followers/Shani-Sinojiya?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Shani-Sinojiya/arff-format-converter?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Shani-Sinojiya/arff-format-converter?style=social)
