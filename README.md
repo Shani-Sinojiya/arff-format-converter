@@ -54,7 +54,7 @@ arff-format-converter -f data.arff -o output -fmt orc
 
 ## AUTHOR
 
-Written by [Shani Sinojiya](https://www.shanisinojiya.com).
+Written by [Shani Sinojiya](https://www.shanisinojiya.tech).
 
 ## REPORTING BUGS:
 
