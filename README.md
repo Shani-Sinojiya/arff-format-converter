@@ -5,7 +5,6 @@
 ![PyPI - License](https://img.shields.io/pypi/l/arff-format-converter?style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/arff-format-converter?style=flat-square)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/Shani-Sinojiya)
-![GitHub issues](https://img.shields.io/github/issues/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Shani-Sinojiya/arff-format-converter/CI?style=flat-square)
