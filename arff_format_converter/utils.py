@@ -1,9 +1,13 @@
 import os
 import argparse
-from tqdm import tqdm
 from .validate import *
 from .texts import *
 from .output import *
+
+import time
+
+from scipy.io import arff
+import pandas as pd
 
 
 def process(filename: str, output_folder: str, output_format: str):
@@ -11,57 +15,26 @@ def process(filename: str, output_folder: str, output_format: str):
     validate_output_folder(output_folder)
     validate_output_format(output_format)
 
-    readdata = False
+    data, _ = arff.loadarff(filename)
+
+    df = pd.DataFrame(data)
+
+    for column in df.columns:
+        if df[column].dtype == object:
+            df[column] = df[column].apply(lambda x: x.decode(
+                'utf-8') if isinstance(x, bytes) else x)
+
     output_path = os.path.join(output_folder, f"{os.path.splitext(
-        os.path.basename(filename))[0]}.{output_format}")
+        os.path.basename(filename))[0]}_{int(time.time())}.{output_format}")
 
-    with open(filename, 'r') as infile:
-        schema = {"relation": "", "attributes": [], "data": []}
+    build_output(df, output_folder, output_path)
 
-        for line in infile:
-            if line[0] == "%":
-                continue
-            elif line[0] == "@":
-                args = line.split()
-                if args[0] == "@relation":
-                    schema["relation"] = args[1]
-                elif args[0] == "@attribute":
-                    values = "".join(args[2:])
-                    if values[0] == "{":
-                        values = values[1:len(values)-1]
-                        values = values.split(",")
-                    schema["attributes"].append(
-                        {"name": args[1], "values": values})
-                elif args[0] == "@data":
-                    readdata = True
-            elif readdata:
-                schema["data"].append(line.strip())
-
-        names = []
-        data = []
-        attrs = schema["attributes"]
-
-        for attr in attrs:
-            names.append(attr["name"])
-
-        for row in tqdm(schema["data"], desc="Reading From File", unit="row", dynamic_ncols=True, leave=False, colour="blue"):
-            row = row.split(",")
-            entry = {}
-            for name in names:
-                entry[name] = row[names.index(name)]
-            data.append(entry)
-
-        schema["data"] = data
-
-        if output_format == "xml" or output_format == "xlsx" or output_format == "orc":
-            build_output(schema, output_path, output_format)
-        else:
-            with open(output_path, 'w') as outfile:
-                build_output(schema, outfile, output_format)
-
-    print(f"\nFile converted into {output_format} format.")
-    print(f"Output saved to: {os.path.abspath(output_path)}")
-    print("Thanks for using arff-format-converter")
+    # Greet and show path
+    print(f"File converted successfully to {output_format.upper()} format.")
+    print(f"Output file: {output_path}")
+    print("")
+    print("Thank you for using ARFF Format Converter.")
+    print("")
 
 
 def main():

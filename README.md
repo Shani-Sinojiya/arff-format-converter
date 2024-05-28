@@ -5,11 +5,15 @@
 ![PyPI - License](https://img.shields.io/pypi/l/arff-format-converter?style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/arff-format-converter?style=flat-square)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/Shani-Sinojiya)
+<<<<<<< HEAD
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub followers](https://img.shields.io/github/followers/Shani-Sinojiya?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Shani-Sinojiya/arff-format-converter?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Shani-Sinojiya/arff-format-converter?style=social)
+=======
+![GitHub issues](https://img.shields.io/github/issues/Shani-Sinojiya/arff-format-converter?style=flat-square)
+>>>>>>> beta
 
 The `arff-format-converter` tool allows you to convert ARFF files to various output formats. Below are the details:
 

@@ -5,6 +5,9 @@ __pycache__
 dist
 build
 arff_format_converter.egg-info
+<<<<<<< HEAD
 arff_format_converter.egg-info/PKG-INFO
 
+=======
+>>>>>>> beta
 test

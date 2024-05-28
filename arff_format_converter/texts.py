@@ -7,7 +7,7 @@ bottom_msg = '''SUPPORTED FORMATS:
     - ORC (Apache ORC format) (output)
 
 AUTHOR:
-    Written by Shani Sinojiya <https://www.shanisinojiya.com>.
+    Written by Shani Sinojiya <https://www.shanisinojiya.tech>.
 
 REPORTING BUGS:
     Report bugs to <https://github.com/Shani-Sinojiya/arff-format-converter/issues>
