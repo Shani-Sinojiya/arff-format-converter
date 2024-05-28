@@ -5,11 +5,8 @@
 ![PyPI - License](https://img.shields.io/pypi/l/arff-format-converter?style=flat-square)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/arff-format-converter?style=flat-square)
 ![GitHub Sponsors](https://img.shields.io/github/sponsors/Shani-Sinojiya)
-![GitHub issues](https://img.shields.io/github/issues/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Shani-Sinojiya/arff-format-converter/CI?style=flat-square)
-![GitHub](https://img.shields.io/github/license/Shani-Sinojiya/arff-format-converter?style=flat-square)
 ![GitHub followers](https://img.shields.io/github/followers/Shani-Sinojiya?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/Shani-Sinojiya/arff-format-converter?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Shani-Sinojiya/arff-format-converter?style=social)
@@ -55,7 +52,7 @@ arff-format-converter -f data.arff -o output -fmt orc
 
 ## AUTHOR
 
-Written by [Shani Sinojiya](https://www.shanisinojiya.com).
+Written by [Shani Sinojiya](https://www.shanisinojiya.tech).
 
 ## REPORTING BUGS:
 
