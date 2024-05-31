@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.0.4b0'
+version = '1.0.4'
 name = 'arff-format-converter'
 description = 'Converts ARFF files to CSV, JSON, XML, XLSX, and ORC'
 author = 'Shani Sinojiya'
@@ -47,7 +47,8 @@ try:
             install_requires=[
                 "argparse",
                 "pandas",
-                "pyarrow"
+                "pyarrow",
+                "scipy"
             ],
             entry_points={
                 'console_scripts': [

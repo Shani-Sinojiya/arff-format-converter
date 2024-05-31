@@ -9,12 +9,13 @@ license = "MIT"
 name = "arff-format-converter"
 readme = "README.md"
 requires-python = ">=3.8"
-version = "1.0.4b0"
+version = "1.0.4"
 
 [tool.poetry.dependencies]
 argparse = "^1.4.0"
 pandas = "^2.2.0"
 pyarrow = "^16.0.0"
+scipy = "^1.13.0"
 
 [tool.poetry.scripts]
 arff-format-converter = "arff_format_converter.arff_converter:main"
