@@ -42,7 +42,7 @@ try:
             author_email=author_email,
             maintainer=author,
             maintainer_email=author_email,
-            license="Creative Commons Attribution-NoDerivatives 4.0 International Public License",
+            license="CC BY-ND 4.0",
             long_description=long_description,
             long_description_content_type='text/markdown',
             install_requires=[
@@ -59,7 +59,7 @@ try:
             keywords=keywords,
             classifiers=[
                 'Programming Language :: Python :: 3',
-                'License :: OSI Approved :: Creative Commons Attribution-NoDerivatives 4.0 International Public License',
+                'License :: CC BY-ND 4.0',
                 'Operating System :: OS Independent',
                 'Intended Audience :: Developers',
                 'Intended Audience :: Science/Research',
