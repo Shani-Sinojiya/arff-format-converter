@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.1.0'
+version = '1.1.1'
 name = 'arff-format-converter'
 description = 'Converts ARFF files to CSV, JSON, XML, XLSX, ORC, and parquet.'
 author = 'Shani Sinojiya'

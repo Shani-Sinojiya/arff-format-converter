@@ -9,7 +9,7 @@ license = "Creative Commons Attribution-NoDerivatives 4.0 International Public L
 name = "arff-format-converter"
 readme = "README.md"
 requires-python = ">=3.8"
-version = "1.1.0"
+version = "1.1.1"
 
 [tool.poetry.dependencies]
 argparse = "^1.4.0"
