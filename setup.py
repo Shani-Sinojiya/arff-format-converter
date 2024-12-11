@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 
-version = '1.0.4'
+version = '1.1.0'
 name = 'arff-format-converter'
-description = 'Converts ARFF files to CSV, JSON, XML, XLSX, and ORC'
+description = 'Converts ARFF files to CSV, JSON, XML, XLSX, ORC, and parquet.'
 author = 'Shani Sinojiya'
 author_email = 'shanisinojiya@gmail.com'
 
@@ -41,7 +41,7 @@ try:
             author_email=author_email,
             maintainer=author,
             maintainer_email=author_email,
-            license="MIT",
+            license="Creative Commons Attribution-NoDerivatives 4.0 International Public License",
             long_description=long_description,
             long_description_content_type='text/markdown',
             install_requires=[
@@ -58,7 +58,7 @@ try:
             keywords=keywords,
             classifiers=[
                 'Programming Language :: Python :: 3',
-                'License :: OSI Approved :: MIT License',
+                'License :: Creative Commons Attribution-NoDerivatives 4.0 International Public License',
                 'Operating System :: OS Independent',
             ],
         )

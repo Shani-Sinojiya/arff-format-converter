@@ -13,6 +13,6 @@ REPORTING BUGS:
     Report bugs to <https://github.com/Shani-Sinojiya/arff-format-converter/issues>
 
 COPYRIGHT:
-    The MIT License (MIT)
-    Copyright © 2024 Shani Sinojiya
+    Creative Commons Attribution-NoDerivatives 4.0 International Public License
+    All Rights Reserved By Shani Sinojiya
 '''

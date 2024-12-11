@@ -3,13 +3,13 @@ import sys
 FILE_ERROR = 0
 OPTION_ERROR = 1
 OTHER_ERROR = 2
-legal_formats = ["xml", "json", "csv", "xlsx", "orc"]
+legal_formats = ["xml", "json", "csv", "xlsx", "orc", "parquet"]
 error_array = ["Invalid file extension - expects '<filename>.arff'",
-               "Invalid option - expects 'xml', 'json', 'csv', 'xlsx', or 'orc'.", "The file format is invalid."]
+               "Invalid option - expects 'xml', 'json', 'csv', 'xlsx', 'orc' or 'parquet'.", "The file format is invalid."]
 error_log = []
 
 
-def console(msg):
+def console(msg: object):
     print(msg, file=sys.stderr)
 
 

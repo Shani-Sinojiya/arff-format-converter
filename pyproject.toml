@@ -5,11 +5,11 @@ requires = ["setuptools>=61.0", "wheel"]
 [tool.poetry]
 authors = ["Shani Sinojiya <shanisinojiya@gmail.com>"]
 description = "A tool to convert ARFF files to different formats."
-license = "MIT"
+license = "Creative Commons Attribution-NoDerivatives 4.0 International Public License"
 name = "arff-format-converter"
 readme = "README.md"
 requires-python = ">=3.8"
-version = "1.0.4"
+version = "1.1.0"
 
 [tool.poetry.dependencies]
 argparse = "^1.4.0"
@@ -23,3 +23,4 @@ arff-format-converter = "arff_format_converter.arff_converter:main"
 [tool.poetry.urls]
 Homepage = "https://github.com/Shani-Sinojiya/arff-format-converter"
 Issues = "https://github.com/Shani-Sinojiya/arff-format-converter/issues"
+Repository = "https://github.com/Shani-Sinojiya/arff-format-converter.git"

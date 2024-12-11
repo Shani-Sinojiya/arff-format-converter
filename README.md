@@ -1,31 +1,42 @@
-# Convert ARFF files to different formats.
+# ARFF Format Converter
 
-![PyPI - Version](https://img.shields.io/pypi/v/arff-format-converter?style=flat-square)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/arff-format-converter?style=flat-square)
-![PyPI - License](https://img.shields.io/pypi/l/arff-format-converter?style=flat-square)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/arff-format-converter?style=flat-square)
-![GitHub Sponsors](https://img.shields.io/github/sponsors/Shani-Sinojiya)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=flat-square)
-![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=flat-square)
-![GitHub followers](https://img.shields.io/github/followers/Shani-Sinojiya?style=social)
-![GitHub forks](https://img.shields.io/github/forks/Shani-Sinojiya/arff-format-converter?style=social)
-![GitHub Repo stars](https://img.shields.io/github/stars/Shani-Sinojiya/arff-format-converter?style=social)
+![PyPI - Version](https://img.shields.io/pypi/v/arff-format-converter?style=for-the-badge)
+![PyPI - License](https://img.shields.io/pypi/l/arff-format-converter?style=for-the-badge)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/arff-format-converter?style=for-the-badge)
+![GitHub Sponsors](https://img.shields.io/github/sponsors/Shani-Sinojiya?style=for-the-badge)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/Shani-Sinojiya/arff-format-converter?style=for-the-badge)
+![GitHub last commit](https://img.shields.io/github/last-commit/Shani-Sinojiya/arff-format-converter?style=for-the-badge)
+![GitHub issues](https://img.shields.io/github/issues/Shani-Sinojiya/arff-format-converter?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/Shani-Sinojiya/arff-format-converter?style=for-the-badge)
+![GitHub Repo stars](https://img.shields.io/github/stars/Shani-Sinojiya/arff-format-converter?style=for-the-badge)
 
 The `arff-format-converter` tool allows you to convert ARFF files to various output formats. Below are the details:
 
-## INSTALL
+## Table of Contents
+
+- [Install](#install)
+- [Synopsis](#synopsis)
+- [Examples](#examples)
+- [Options](#options)
+- [Supported Formats](#supported-formats)
+- [Author](#author)
+- [Contributing](#contributing)
+- [Features](#features)
+- [License](#license)
+
+## Install
 
 ```bash
 pip install arff-format-converter
 ```
 
-## SYNOPSIS
+## Synopsis
 
 ```bash
-arff-format-converter -f <file> -o <output_folder> -fmt <output_format>
+arff-format-converter -f <file> -o <output_folder> -fmt <output_format> [--fast]
 ```
 
-## EXAMPLES
+## Examples
 
 ```bash
 arff-format-converter -f data.arff -o output -fmt json
@@ -33,15 +44,18 @@ arff-format-converter -f data.arff -o output -fmt xml
 arff-format-converter -f data.arff -o output -fmt csv
 arff-format-converter -f data.arff -o output -fmt xlsx
 arff-format-converter -f data.arff -o output -fmt orc
+arff-format-converter -f data.arff -o output -fmt parquet
+arff-format-converter -f data.arff -o output -fmt json --fast
 ```
 
-## OPTIONS
+## Options
 
 - `-f, --file` Path to the ARFF file.
 - `-o, --output` Path to the output folder.
-- `-fmt, --format` Output format: 'xml', 'json', 'csv', 'xlsx', 'orc'.
+- `-fmt, --format` Output format: `xml`, `json`, `csv`, `xlsx`, `orc`, `parquet`.
+- `--fast` Enable **fast mode**. Performs the conversion.
 
-## SUPPORTED FORMATS
+## Supported Formats
 
 - **ARFF** (input)
 - **XML** (output)
@@ -49,19 +63,24 @@ arff-format-converter -f data.arff -o output -fmt orc
 - **CSV** (output)
 - **XLSX** (output)
 - **ORC** (Apache ORC format) (output)
+- **Parquet** (output)
 
-## AUTHOR
+## Author
 
 Written by [Shani Sinojiya](https://www.shanisinojiya.tech).
 
-## REPORTING BUGS:
+## Contributing
 
-Report bugs to [issue section](https://github.com/Shani-Sinojiya/arff-format-converter/issues)
+Contributions are welcome! Please fork the repository and submit a pull request, or check the [issues section](https://github.com/Shani-Sinojiya/arff-format-converter/issues) for tasks that need help.
 
-**_Remember to replace `"data.arff"` with the actual path to your ARFF file and `"output"` with the desired output folder. Feel free to adapt this code snippet for other formats like XML, CSV, XLSX, or ORC as needed! 🚀_**
+## Features
 
-## Buy me a coffee ☕️
+- Convert `.arff` files into multiple formats: `XML`, `JSON`, `CSV`, `XLSX`, `ORC`, and now `Parquet`.
+- CLI-based, easy-to-use interface.
+- Handles large datasets efficiently.
+- Supports automated error handling and detailed logs.
+- **Fast mode**: Skip validation checks for quicker conversions.
 
-If you like my work, feel free to support it by buying me a coffee.
+## License
 
-<a href="https://www.buymeacoffee.com/shanisinojiya" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-blue.png" alt="Buy Me A Coffee" style="height: 60px !important;width: 217px !important;" ></a>
+This project is licensed under the [Creative Commons Attribution-NoDerivatives 4.0 International Public License](./LICENSE).
