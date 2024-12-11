@@ -59,7 +59,6 @@ try:
             keywords=keywords,
             classifiers=[
                 'Programming Language :: Python :: 3',
-                'License :: CC BY-ND 4.0',
                 'Operating System :: OS Independent',
                 'Intended Audience :: Developers',
                 'Intended Audience :: Science/Research',
