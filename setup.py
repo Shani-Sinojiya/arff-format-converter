@@ -58,7 +58,7 @@ try:
             keywords=keywords,
             classifiers=[
                 'Programming Language :: Python :: 3',
-                'License :: Creative Commons Attribution-NoDerivatives 4.0 International Public License',
+                'License-File: LICENSE',
                 'Operating System :: OS Independent',
             ],
         )
