@@ -22,6 +22,7 @@ keywords = [
     "csv",
     "excel",
     "orc",
+    "parquet",
     "pandas",
     "pyarrow",
     "data-manipulation",
@@ -58,8 +59,12 @@ try:
             keywords=keywords,
             classifiers=[
                 'Programming Language :: Python :: 3',
-                'License-File: LICENSE',
+                'License :: OSI Approved :: Creative Commons Attribution-NoDerivatives 4.0 International Public License',
                 'Operating System :: OS Independent',
+                'Intended Audience :: Developers',
+                'Intended Audience :: Science/Research',
+                'Programming Language :: Python :: 3 :: Only',
+                'Natural Language :: English',
             ],
         )
 except FileNotFoundError:
