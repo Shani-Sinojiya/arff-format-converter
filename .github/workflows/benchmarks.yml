@@ -43,15 +43,15 @@ jobs:
         
     - name: 📊 Generate test data
       run: |
-        mkdir -p benchmarks
-        # Create basic test data if scripts don't exist
-        echo "Creating test data..."
+        uv run python scripts/generate_test_data.py
         
     - name: 🏃‍♂️ Run benchmarks
       run: |
-        # Create placeholder benchmark if script doesn't exist
-        mkdir -p benchmarks
-        echo '{"format": "csv", "size": 1000, "time": 0.045, "speedup": "19x"}' > benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json
+        uv run python scripts/benchmark_suite.py \
+          --output benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json \
+          --formats csv,json,parquet,xlsx \
+          --sizes 1000,10000,50000 \
+          --iterations 3
           
     - name: 📈 Compare with baseline (PR only)
       if: github.event_name == 'pull_request'
