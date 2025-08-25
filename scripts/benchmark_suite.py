@@ -61,10 +61,24 @@ def main():
     
     args = parser.parse_args()
     
-    formats = args.formats.split(',')
-    sizes = [int(s) for s in args.sizes.split(',')]
-    
-    generate_benchmark_data(args.output, formats, sizes, args.iterations)
+    try:
+        formats = args.formats.split(',')
+        sizes = [int(s) for s in args.sizes.split(',')]
+        
+        print(f"🚀 Starting benchmark generation...")
+        print(f"📊 Formats: {formats}")
+        print(f"📏 Sizes: {sizes}")
+        print(f"🔄 Iterations: {args.iterations}")
+        print(f"📁 Output: {args.output}")
+        
+        generate_benchmark_data(args.output, formats, sizes, args.iterations)
+        print(f"✅ Benchmark generation completed successfully!")
+        
+    except Exception as e:
+        print(f"❌ Error during benchmark generation: {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()

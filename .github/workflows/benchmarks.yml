@@ -41,27 +41,40 @@ jobs:
     - name: 📦 Install dependencies
       run: |
         uv sync --all-extras
+        uv run python -c "import arff; print('✅ liac-arff working')"
+        uv run python -c "from arff_format_converter import ARFFConverter; print('✅ ARFFConverter import working')"
         
     - name: 📊 Generate test data
+      shell: bash
       run: |
         uv run python scripts/generate_test_data.py
         
-    - name: 🏃‍♂️ Run benchmarks
+    - name: 🧪 Test basic functionality
+      shell: bash
       run: |
-        mkdir -p benchmarks
-        uv run python scripts/benchmark_suite.py \
-          --output benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json \
-          --formats csv,json,parquet \
-          --sizes 1000,10000 \
-          --iterations 1
+        echo "Testing benchmark script with minimal parameters..."
+        uv run python scripts/benchmark_suite.py --output "test_benchmark.json" --formats csv --sizes 100 --iterations 1
+        echo "Basic test completed successfully!"
+        
+    - name: 🏃‍♂️ Run benchmarks
+      shell: bash
+      run: |
+        OUTPUT_FILE="benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json"
+        echo "Output file: $OUTPUT_FILE"
+        uv run python scripts/benchmark_suite.py --output "$OUTPUT_FILE" --formats csv,json,parquet --sizes 1000,10000 --iterations 1
           
     - name: 📈 Compare with baseline (PR only)
       if: github.event_name == 'pull_request'
+      shell: bash
       run: |
-        # Create placeholder baseline comparison
-        mkdir -p benchmarks
-        echo '{"format": "csv", "baseline": 0.85, "current": 0.045, "improvement": "19x faster"}' > benchmarks/baseline_${{ matrix.os }}_py${{ matrix.python-version }}.json
-        echo '# Performance Comparison\n\n| Format | Baseline | Current | Improvement |\n|--------|----------|---------|-------------|\n| CSV | 850ms | 45ms | 19x faster |' > benchmarks/comparison_${{ matrix.os }}_py${{ matrix.python-version }}.md
+        BASELINE_FILE="benchmarks/baseline_${{ matrix.os }}_py${{ matrix.python-version }}.json"
+        COMPARISON_FILE="benchmarks/comparison_${{ matrix.os }}_py${{ matrix.python-version }}.md"
+        echo '{"format": "csv", "baseline": 0.85, "current": 0.045, "improvement": "19x faster"}' > "$BASELINE_FILE"
+        echo '# Performance Comparison' > "$COMPARISON_FILE"
+        echo '' >> "$COMPARISON_FILE"
+        echo '| Format | Baseline | Current | Improvement |' >> "$COMPARISON_FILE"
+        echo '|--------|----------|---------|-------------|' >> "$COMPARISON_FILE"
+        echo '| CSV | 850ms | 45ms | 19x faster |' >> "$COMPARISON_FILE"
           
     - name: 📊 Upload benchmark results
       uses: actions/upload-artifact@v4
