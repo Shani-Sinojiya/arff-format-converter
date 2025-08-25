@@ -1,0 +1,223 @@
+name: 🚀 Performance Benchmarks
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run nightly benchmarks
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+    inputs:
+      comparison_baseline:
+        description: 'Git ref to compare against (default: main)'
+        required: false
+        default: 'main'
+
+jobs:
+  benchmark:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.10', '3.11', '3.12']
+        
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Need full history for comparison
+        
+    - name: 🐍 Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+        
+    - name: ⚡ Install uv
+      uses: astral-sh/setup-uv@v2
+      
+    - name: 📦 Install dependencies
+      run: |
+        uv sync
+        
+    - name: 📊 Generate test data
+      run: |
+        uv run python scripts/generate_test_data.py
+        
+    - name: 🏃‍♂️ Run benchmarks
+      run: |
+        uv run python scripts/benchmark_suite.py \
+          --output benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json \
+          --formats csv,json,parquet,xlsx \
+          --sizes 1000,10000,50000 \
+          --iterations 3
+          
+    - name: 📈 Compare with baseline (PR only)
+      if: github.event_name == 'pull_request'
+      run: |
+        # Checkout baseline for comparison
+        git checkout ${{ github.event.pull_request.base.sha }}
+        uv sync
+        uv run python scripts/benchmark_suite.py \
+          --output benchmarks/baseline_${{ matrix.os }}_py${{ matrix.python-version }}.json \
+          --formats csv,json,parquet,xlsx \
+          --sizes 1000,10000,50000 \
+          --iterations 3
+          
+        # Return to PR branch
+        git checkout ${{ github.event.pull_request.head.sha }}
+        
+        # Generate comparison report
+        uv run python scripts/compare_benchmarks.py \
+          benchmarks/baseline_${{ matrix.os }}_py${{ matrix.python-version }}.json \
+          benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json \
+          --output benchmarks/comparison_${{ matrix.os }}_py${{ matrix.python-version }}.md
+          
+    - name: 📊 Upload benchmark results
+      uses: actions/upload-artifact@v3
+      with:
+        name: benchmarks-${{ matrix.os }}-py${{ matrix.python-version }}
+        path: benchmarks/
+        
+    - name: 💬 Comment PR with results (PR only)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const path = 'benchmarks/comparison_${{ matrix.os }}_py${{ matrix.python-version }}.md';
+          
+          if (fs.existsSync(path)) {
+            const comparison = fs.readFileSync(path, 'utf8');
+            
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `## 🚀 Performance Benchmark Results (${{ matrix.os }}, Python ${{ matrix.python-version }})\n\n${comparison}`
+            });
+          }
+
+  performance-regression-check:
+    runs-on: ubuntu-latest
+    needs: benchmark
+    if: github.event_name == 'pull_request'
+    
+    steps:
+    - name: 📥 Download all benchmark results
+      uses: actions/download-artifact@v3
+      
+    - name: 🔍 Check for performance regressions
+      run: |
+        python scripts/check_regressions.py \
+          --threshold 10 \
+          --fail-on-regression \
+          benchmarks/
+          
+    - name: ❌ Fail if significant regression detected
+      if: failure()
+      run: |
+        echo "❌ Performance regression detected!"
+        echo "Review the benchmark comparison comments above."
+        echo "If this is expected, add 'skip-performance-check' label to PR."
+        exit 1
+
+  benchmark-summary:
+    runs-on: ubuntu-latest
+    needs: benchmark
+    if: always()
+    
+    steps:
+    - name: 📥 Download benchmark results
+      uses: actions/download-artifact@v3
+      
+    - name: 📊 Generate summary report
+      run: |
+        python scripts/generate_benchmark_summary.py \
+          --input benchmarks/ \
+          --output benchmark_summary.md \
+          --format markdown
+          
+    - name: 📈 Update performance tracking
+      if: github.ref == 'refs/heads/main'
+      run: |
+        # Store historical performance data
+        python scripts/update_performance_history.py \
+          --results benchmarks/ \
+          --commit ${{ github.sha }} \
+          --branch main
+          
+    - name: 🏆 Update README badges
+      if: github.ref == 'refs/heads/main'
+      run: |
+        # Update performance badges in README
+        python scripts/update_performance_badges.py \
+          --results benchmarks/ \
+          --readme README.md
+
+  memory-profiling:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: ⚡ Install uv
+      uses: astral-sh/setup-uv@v2
+      
+    - name: 📦 Install dependencies + profiling tools
+      run: |
+        uv sync
+        uv add memory-profiler psutil
+        
+    - name: 🧠 Memory profiling
+      run: |
+        uv run python -m memory_profiler scripts/memory_profile.py \
+          --output memory_profile.txt \
+          --sizes 10000,50000,100000
+          
+    - name: 📊 Upload memory profile
+      uses: actions/upload-artifact@v3
+      with:
+        name: memory-profile
+        path: memory_profile.txt
+
+  stress-testing:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || contains(github.event.pull_request.labels.*.name, 'stress-test')
+    
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+      
+    - name: 🐍 Set up Python 3.11
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: ⚡ Install uv
+      uses: astral-sh/setup-uv@v2
+      
+    - name: 📦 Install dependencies
+      run: |
+        uv sync
+        
+    - name: 🏋️ Large file stress test
+      run: |
+        # Test with progressively larger files
+        uv run python scripts/stress_test.py \
+          --max-size 1000000 \
+          --formats csv,parquet \
+          --timeout 300 \
+          --output stress_test_results.json
+          
+    - name: 📊 Upload stress test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: stress-test-results
+        path: stress_test_results.json
