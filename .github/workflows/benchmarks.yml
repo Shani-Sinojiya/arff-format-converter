@@ -39,10 +39,11 @@ jobs:
       uses: astral-sh/setup-uv@v2
       
     - name: 📦 Install dependencies
+      shell: bash
       run: |
         uv sync --all-extras
-        uv run python -c "import arff; print('✅ liac-arff working')"
-        uv run python -c "from arff_format_converter import ARFFConverter; print('✅ ARFFConverter import working')"
+        uv run python -c "import arff; print('[SUCCESS] liac-arff working')"
+        uv run python -c "from arff_format_converter import ARFFConverter; print('[SUCCESS] ARFFConverter import working')"
         
     - name: 📊 Generate test data
       shell: bash

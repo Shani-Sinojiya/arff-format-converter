@@ -8,7 +8,18 @@ import json
 import time
 import sys
 import argparse
+import os
 from pathlib import Path
+
+# Ensure UTF-8 output for cross-platform compatibility
+def safe_print(message):
+    """Print message with encoding safety for Windows."""
+    try:
+        print(message)
+    except UnicodeEncodeError:
+        # Fallback to ASCII-safe version
+        safe_message = message.encode('ascii', 'replace').decode('ascii')
+        print(safe_message)
 
 def generate_benchmark_data(output_file, formats=None, sizes=None, iterations=3):
     """Generate mock benchmark data for demonstration."""
@@ -46,11 +57,11 @@ def generate_benchmark_data(output_file, formats=None, sizes=None, iterations=3)
     output_path = Path(output_file)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2)
     
-    print(f"✅ Benchmark results written to {output_file}")
-    print(f"📊 Generated data for {len(results)} test cases")
+    safe_print(f"[SUCCESS] Benchmark results written to {output_file}")
+    safe_print(f"[INFO] Generated data for {len(results)} test cases")
 
 def main():
     parser = argparse.ArgumentParser(description='Generate benchmark data')
@@ -65,17 +76,17 @@ def main():
         formats = args.formats.split(',')
         sizes = [int(s) for s in args.sizes.split(',')]
         
-        print(f"🚀 Starting benchmark generation...")
-        print(f"📊 Formats: {formats}")
-        print(f"📏 Sizes: {sizes}")
-        print(f"🔄 Iterations: {args.iterations}")
-        print(f"📁 Output: {args.output}")
+        safe_print(f"[START] Starting benchmark generation...")
+        safe_print(f"[INFO] Formats: {formats}")
+        safe_print(f"[INFO] Sizes: {sizes}")
+        safe_print(f"[INFO] Iterations: {args.iterations}")
+        safe_print(f"[INFO] Output: {args.output}")
         
         generate_benchmark_data(args.output, formats, sizes, args.iterations)
-        print(f"✅ Benchmark generation completed successfully!")
+        safe_print(f"[SUCCESS] Benchmark generation completed successfully!")
         
     except Exception as e:
-        print(f"❌ Error during benchmark generation: {e}")
+        safe_print(f"[ERROR] Error during benchmark generation: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)

@@ -6,6 +6,16 @@ Generate test data for ARFF Format Converter benchmarks
 import tempfile
 from pathlib import Path
 
+# Ensure UTF-8 output for cross-platform compatibility
+def safe_print(message):
+    """Print message with encoding safety for Windows."""
+    try:
+        print(message)
+    except UnicodeEncodeError:
+        # Fallback to ASCII-safe version
+        safe_message = message.encode('ascii', 'replace').decode('ascii')
+        print(safe_message)
+
 def generate_test_arff(output_path, num_rows=1000):
     """Generate a simple test ARFF file."""
     
@@ -27,10 +37,10 @@ def generate_test_arff(output_path, num_rows=1000):
         class_val = "positive" if i % 2 == 0 else "negative"
         arff_content += f"{feature1},{feature2},{feature3},{class_val}\n"
     
-    with open(output_path, 'w') as f:
+    with open(output_path, 'w', encoding='utf-8') as f:
         f.write(arff_content)
     
-    print(f"✅ Generated test ARFF file: {output_path} ({num_rows} rows)")
+    safe_print(f"[SUCCESS] Generated test ARFF file: {output_path} ({num_rows} rows)")
 
 def main():
     """Generate test data files."""
@@ -41,19 +51,19 @@ def main():
         # Generate different sized test files
         sizes = [1000, 10000, 50000]
         
-        print(f"🚀 Starting test data generation...")
-        print(f"📁 Output directory: {test_data_dir}")
+        safe_print(f"[START] Starting test data generation...")
+        safe_print(f"[INFO] Output directory: {test_data_dir}")
         
         for size in sizes:
             output_file = test_data_dir / f"test_data_{size}.arff"
-            print(f"📝 Generating {size} rows...")
+            safe_print(f"[INFO] Generating {size} rows...")
             generate_test_arff(output_file, size)
         
-        print(f"🎯 Generated {len(sizes)} test files in {test_data_dir}")
-        print(f"✅ Test data generation completed successfully!")
+        safe_print(f"[INFO] Generated {len(sizes)} test files in {test_data_dir}")
+        safe_print(f"[SUCCESS] Test data generation completed successfully!")
         
     except Exception as e:
-        print(f"❌ Error during test data generation: {e}")
+        safe_print(f"[ERROR] Error during test data generation: {e}")
         import traceback
         traceback.print_exc()
         import sys
