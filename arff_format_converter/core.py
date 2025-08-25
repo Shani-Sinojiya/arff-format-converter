@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Any
 
 import pandas as pd
 
-# Performance optimization imports
+# Performance optimization imports with error handling
 try:
     import polars as pl
     HAS_POLARS = True
