@@ -29,6 +29,7 @@ dependencies = [
   "fastparquet>=2023.10.0",
   "lxml>=4.9.0",
   "openpyxl>=3.1.0",
+  "liac-arff>=2.5.0",
 ]
 description = "Ultra-high-performance ARFF file converter with 100x speed improvements"
 keywords = [
@@ -70,6 +71,7 @@ dev = [
   "pytest>=7.4.0",
   "pytest-cov>=4.1.0",
   "pytest-benchmark>=4.0.0",
+  "pytest-timeout>=2.1.0",
   "black>=23.9.0",
   "isort>=5.12.0",
   "flake8>=6.1.0",

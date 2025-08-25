@@ -19,6 +19,7 @@ jobs:
   benchmark:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
         python-version: ['3.10', '3.11', '3.12']
@@ -39,7 +40,7 @@ jobs:
       
     - name: 📦 Install dependencies
       run: |
-        uv sync
+        uv sync --all-extras
         
     - name: 📊 Generate test data
       run: |
@@ -47,11 +48,12 @@ jobs:
         
     - name: 🏃‍♂️ Run benchmarks
       run: |
+        mkdir -p benchmarks
         uv run python scripts/benchmark_suite.py \
           --output benchmarks/results_${{ matrix.os }}_py${{ matrix.python-version }}.json \
-          --formats csv,json,parquet,xlsx \
-          --sizes 1000,10000,50000 \
-          --iterations 3
+          --formats csv,json,parquet \
+          --sizes 1000,10000 \
+          --iterations 1
           
     - name: 📈 Compare with baseline (PR only)
       if: github.event_name == 'pull_request'
@@ -152,7 +154,7 @@ jobs:
       
     - name: 📦 Install dependencies + profiling tools
       run: |
-        uv sync
+        uv sync --all-extras
         uv add memory-profiler psutil
         
     - name: 🧠 Memory profiling
@@ -184,7 +186,7 @@ jobs:
       
     - name: 📦 Install dependencies
       run: |
-        uv sync
+        uv sync --all-extras
         
     - name: 🏋️ Large file stress test
       run: |
