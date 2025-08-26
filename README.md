@@ -446,14 +446,14 @@ python scripts/compare_performance.py baseline.json current.json
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+CC BY-ND 4.0 License - see [LICENSE](LICENSE) file for details.
 
 ## 🔗 Links
 
-- **PyPI**: https://pypi.org/project/arff-format-converter/
-- **Documentation**: https://arff-format-converter.readthedocs.io/
-- **Issues**: https://github.com/your-repo/arff-format-converter/issues
-- **Benchmarks**: https://github.com/your-repo/arff-format-converter/wiki/Benchmarks
+- **PyPI**: https://pypi.org/project/arff-format-converter
+- **Documentation**: https://www.arff-format-converter.shanisinojiya.me
+- **Issues**: https://github.com/Shani-Sinojiya/arff-format-converter/issues
+- **Benchmarks**: https://github.com/Shani-Sinojiya/arff-format-converter/wiki/Benchmarks
 
 ---
 
